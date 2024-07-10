@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Forecast App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 4px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .weather-data {
+            margin-top: 20px;
+        }
+        .weather-item {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Weather Forecast App</h1>
+        <form method="POST">
+            <input type="text" name="city" placeholder="Enter city name" required>
+            <input type="submit" value="Get Weather Forecast">
+        </form>
+        {% if weather_data %}
+            <div class="weather-data">
+                <h2>Weather forecast for {{ city }}:</h2>
+                {% for item in weather_data %}
+                    <div class="weather-item">
+                        <p><strong>Date and Time:</strong> {{ item[0] }}</p>
+                        <p><strong>Temperature:</strong> {{ item[1] }} °C</p>
+                        <p><strong>Description:</strong> {{ item[2] }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% elif city %}
+            <p>No weather data found for {{ city }}.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
